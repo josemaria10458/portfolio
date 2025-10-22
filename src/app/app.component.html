@@ -1,0 +1,250 @@
+<nav class="navbar navbar-expand-lg fixed-top bg-transparent">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">José María Ortiz López</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#acerca">Acerca de</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#experiencia">Experiencia</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#lenguajes">Lenguajes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#proyectos">Proyectos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contacto">Contacto</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="header">
+  <!-- <img src="./../assets/images/fotoJMPerfil.PNG" alt="fotoJm" class="fotoJm"/> -->
+  <div class="descripcion">
+    <div class="fotoPerfil">
+      <img src="./../assets/images/fotoJMPerfil.PNG" class="fotoJm" />
+    </div>
+    <div class="texto">
+      <h1>Welcome to my portfolio!</h1>
+      <h3>Soy José Maria Ortiz, Frontend developer.</h3>
+      <div class="botones">
+        <a href="https://www.google.com/intl/es/gmail/about/"
+          ><img src="./../assets/images/icons8-gmail-nuevo-48.png" alt="js"
+        /></a>
+        <a href="https://linkedin.com/in/jose-maria-ortiz-lopez-197147220/"
+          ><img src="./../assets/images/icons8-linkedin-48.png" alt="ty"
+        /></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="about" id="acerca">
+  <div class="aboutTitle">
+    <h3 class="aboutTitle mb-5">Acerca de</h3>
+  </div>
+
+  <div class="aboutContainer align-items-center">
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="about-image">
+        <img
+          src="./../assets/images/escritorio.jpg"
+          class="img-fluid rounded shadow"
+          alt="José María Ortiz trabajando"
+        />
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="about-description">
+        <p class="mb-4">
+          Soy un apasionado programador Full Stack con experiencia en desarrollo
+          web y aplicaciones. Mi trayectoria profesional me ha permitido
+          explorar diferentes tecnologías y frameworks, desde el front-end hasta
+          el back-end.
+        </p>
+
+        <p class="mb-4">
+          Me especializo en crear soluciones robustas y escalables que
+          satisfagan las necesidades de mis clientes y usuarios finales. Me
+          encanta enfrentar desafíos complejos y encontrar soluciones creativas
+          para resolver problemas.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a
+            href="./../assets/files/CV JOSE MARIA-2023-actualizado.pdf"
+            download="CV JOSE MARIA-2023-actualizado"
+            class="button"
+          >
+            Descargar CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="experiencia" id="experiencia">
+  <h3 class="text-center mb-5">Experiencia</h3>
+  <div class="row g-4">
+    <div
+      class="cartasEmpresas col-xl-2 col-lg-4 col-md-6 col-sm-12"
+      *ngFor="let job of jobs"
+    >
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ job.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">
+            {{ job.date }}
+          </h6>
+          <p class="card-text">
+            {{ job.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lenguajes" id="lenguajes">
+  <h3>Lenguajes:</h3>
+  <div class="logos">
+    <div class="columnReverse" data-direction="left">
+      <img
+        src="./../assets/images/icons8-hablar-con-descaro-a-48.png"
+        alt="sass"
+      />
+      <img src="./../assets/images/html-5.png" alt="html" />
+      <img src="./../assets/images/social.png" alt="css" />
+      <img src="./../assets/images/icons8-mecanografiado-48.png" alt="ty" />
+      <img src="./../assets/images/js.png" alt="js" />
+      <img src="./../assets/images/java.png" alt="java" />
+      <img src="./../assets/images/icons8-angular-48.png" alt="angular" />
+    </div>
+    <div class="column" data-direction="right">
+      <img src="./../assets/images/mysql.png" alt="mysql" />
+      <img src="./../assets/images/icons8-iónico-48.png" alt="ionic" />
+      <img src="./../assets/images/php.png" alt="php" />
+      <img src="./../assets/images/piton.png" alt="py" />
+      <img
+        src="./../assets/images/icons8-sourcetree-is-a-nice-alternative-to-the-git-command-line-24.png"
+        alt=""
+      />
+      <img src="./../assets/images/github.png" alt="git" />
+    </div>
+  </div>
+</div>
+
+<div class="contactForm">
+  <h3>Contacto</h3>
+  <div class="formContainer">
+    <form [formGroup]="contactForm">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Nombre"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control col-md-4 col-lg-6"
+          id="email"
+          placeholder="Email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="message">Mensaje</label>
+        <textarea
+          class="form-control"
+          id="message"
+          placeholder="Mensaje"
+        ></textarea>
+      </div>
+      <div class="btnEnviarContainer">
+        <button type="submit" class="button">Enviar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <div class="proyectos" id="proyectos">
+  <h3>Proyectos:</h3>
+  <div class="cartasProyectos">
+    <ul id="listaProyectos">
+      <li class="liCards" id="card1">
+        <div class="card">
+          <div class="textoProyecto">
+            <h3>Pelis app</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti
+              dolore repudiandae veritatis soluta! Ullam modi laboriosam quidem
+              odio illo maiores veritatis eaque dolores? Dolorem aperiam
+              obcaecati enim aut atque pariatur?
+            </p>
+            <div class="tecnologias">
+              <ul class="listaTecnologias">
+                <li class="tecnologia"><article>Angular</article></li>
+              </ul>
+            </div>
+          </div>
+          <div class="imageCard">
+            <img
+              src="./../assets/images/foto1.PNG"
+              class="imageCard"
+              alt="..."
+            />
+          </div>
+        </div>
+      </li>
+      <li class="liCards" id="card2">
+        <div class="card">
+          <div class="textoProyecto">
+            <h3>Finals app</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti
+              dolore repudiandae veritatis soluta! Ullam modi laboriosam quidem
+              odio illo maiores veritatis eaque dolores? Dolorem aperiam
+              obcaecati enim aut atque pariatur?
+            </p>
+            <div class="tecnologias">
+              <ul class="listaTecnologias">
+                <li class="tecnologia">Angular</li>
+                <li class="tecnologia">Ionic</li>
+                <li class="tecnologia">Firebase</li>
+                <li class="tecnologia">Stripe</li>
+              </ul>
+            </div>
+          </div>
+          <div class="imageCard">
+            <img
+              src="./../assets/images/login.PNG"
+              class="imageProyecto"
+              alt="..."
+            />
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div> -->
+
+<div class="footer">José María Ortiz Lopez &#169; 2024</div>
