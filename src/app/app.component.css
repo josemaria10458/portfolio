@@ -1,13 +1,39 @@
 *{
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
     transition: all ease-in 0.5;
-    /* display: block; */
 }
 
-.navScroll {
+html, body {
     width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+app-root {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    overflow-x: hidden;
+}
+
+/* Prevenir overflow horizontal en todos los elementos principales */
+section, div, nav, main {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* .container-fluid {
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+} */
+
+.navScroll {
+    /* width: 100%; */
     height: 70px;
     text-align: center;
     position: sticky;
@@ -29,7 +55,7 @@
         padding: 21px;
         margin-right: 30px;
         
-        li a{
+        :is(li a){
             text-align: center;
         }
     }
@@ -48,7 +74,8 @@
     transition: all 0.3s ease;
     background: transparent !important;
     z-index: 1000;
-    width: 100%;
+    width: 97%;
+    max-width: 100%;
     height: 70px;
     position: fixed;
     top: 0;
@@ -60,7 +87,11 @@
     padding: 0 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    margin: 10px;
+    margin: 25px 25px 25px 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 25px;
+    margin-right: 25px !important;
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     background: rgba(255, 255, 255, 0.1);
@@ -86,7 +117,7 @@
 /* En móviles, asegurar que el menú colapsado funcione */
 @media (max-width: 991.98px) {
     .navbar {
-        margin: 5px;
+        margin: 0;
         padding: 0 15px;
     }
     
@@ -118,6 +149,7 @@
         margin: 5px 0;
         transition: all 0.3s ease;
         font-weight: 500;
+        
     }
     
     .navbar-nav .nav-link:hover {
@@ -169,35 +201,11 @@ nav a {
     color: white;
 }
 
-.container-fluid{
-    height: 70px;
-    background-color: #1a1a1a;
-    display: flex;
-    justify-content: flex-end;
-    z-index: 1000;
-    color: aliceblue;
-    animation: animacion-nav linear both;
-    animation-timeline: scroll(root);
-    animation-range: 0 200px;
-
-    .navbar-nav{
-        margin-right: 100px;
-    }
-
-    .nav-link{
-        margin-right: 20px;
-    }
-    .navbar{
-        margin-right: 100px;
-        display: flex;
-    }
-
-}
-
 .header {
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
     height: 100vh;
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     flex-direction: row;
     text-align: center;
@@ -239,7 +247,7 @@ nav a {
         flex-direction: column;
         margin-left: 15px;
         text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
-        h1{
+        :is(h1){
             text-align: justify;
         }
     }
@@ -263,12 +271,14 @@ nav a {
     flex-direction: row; */
     background: #ffffff;
     padding: 80px 0;
-    margin: 20px;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
     border-top: 1px solid #e9ecef;
     animation: animacion-opacidad linear;
     animation-timeline: view();
     animation-range: entry 20% cover 40%;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .aboutContainer {
@@ -313,6 +323,11 @@ nav a {
     margin: 2px;
 }
 
+.about-description .btn {
+    position: relative;
+    overflow: hidden;
+}
+
 .about-description .btn::before {
     content: '';
     position: absolute;
@@ -334,16 +349,17 @@ nav a {
 }
 
     .sobreMi{
-        margin: 20px;
+        margin: 20px 0;
         padding: 15px;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        img {
+        :is(img) {
+            max-width: 100%;
             width: 500px;
-            height: 500px;
+            height: auto;
             border-radius: 20px;
-            margin-right: 70px;
+            margin-right: 0;
             opacity: 0 0.1;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
         }
@@ -406,8 +422,10 @@ nav a {
 
 
 .experiencia{
-    margin: 20px;
+    margin: 20px 0;
     padding: 20px;
+    width: 100%;
+    max-width: 100%;
     animation: animacion-opacidad linear;
     animation-timeline: view();
     animation-range: entry 20% cover 40%;
@@ -417,17 +435,6 @@ nav a {
         height: 100%;
         padding: 15px; 
 }
-    /* .cartasEmpresas{
-         width: 100%;
-        height: 100%;
-        padding: 15px; */
-        /* margin: 30px; */
-        /* grid-template-rows: repeat(5, 1fr); */
-        /* gap: 20px;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto; */
-    /* } */ 
     .card{
         margin: 10px;
         height: 325px;
@@ -441,28 +448,30 @@ nav a {
 
 @keyframes columnasLenguajes {
     from{
-        transform: translateX(-100%);
+        transform: translateX(-120%);
     }
 
     to {
-        transform: translateX(100%);
+        transform: translateX(60%);
     }
 }
 @keyframes columnasLenguajesReverse {
     from{
-        transform: translateX(100%);
+        transform: translateX(120%);
     }
 
     to {
-        transform: translateX(-100%);
+        transform: translateX(-40%);
     }
 }
 
 .lenguajes{
-    margin: 20px;
+    margin: 20px 0;
     padding: 20px;
+    width: 100%;
+    max-width: 100%;
     z-index: 10;
-    height: 475px;
+    /* height: 475px; */
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff, #ffffff, rgba(255, 255, 255, 0)); 
 
     .logos{
@@ -472,16 +481,20 @@ nav a {
         padding: 15px;
         justify-content: center;
         align-items: center;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
 
         .columnReverse {
             display: flex;
             flex-direction: row-reverse;
             overflow: hidden;
-            gap: 120px;
+            gap: clamp(20px, 10vw, 120px);
             text-align: center;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            max-width: 100%;
             animation: columnasLenguajes linear forwards;
             animation-timeline: scroll(root);
         }
@@ -490,16 +503,17 @@ nav a {
             display: flex;
             flex-direction: row;
             overflow: hidden;
-            gap: 120px;
+            gap: clamp(20px, 10vw, 120px);
             text-align: center;
             justify-content: center;
             align-items: center;
             animation: columnasLenguajesReverse linear forwards;
             animation-timeline: scroll(root);
             padding: 20px;
+            max-width: 100%;
         }
 
-        img {
+        :is(img) {
             width: 70px;
             height: 70px;
             box-shadow: 0 0 20px 0();
@@ -520,13 +534,17 @@ nav a {
     align-items: center;
     gap: 20px;
     padding: 0 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .proyectos{
-    margin: 20px;
+    margin: 20px 0;
     padding: 20px;
     width: 100%;
-    li{
+    max-width: 100%;
+    :is(li){
         margin-top: 20px;
     }
 
@@ -586,6 +604,7 @@ nav a {
     .card{
         box-sizing: border-box;
         width: 80%;
+        max-width: 100%;
         border-radius: 40px;
         box-shadow: 0 0 30px 0 rgba(0, 0, 0, .4);
         height: var(--cardHeigth);
@@ -594,6 +613,7 @@ nav a {
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        margin: 0 auto;
 
         .textoProyecto{
             flex: 0 0 30%;
@@ -639,7 +659,7 @@ nav a {
     }
 
     
-    h3{
+    :is(h3){
         font-size: 2.5rem;
     }
 
@@ -785,22 +805,28 @@ nav a {
 }
 
 .contacto{
-    margin: 20px;
+    margin: 20px 0;
     padding: 20px;
+    width: 100%;
+    max-width: 100%;
 
     .redesSociales{
         display: grid;
-        grid-template-columns: repeat(4, 10fr);
-        gap: 150px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
         justify-content: center;
         align-items: center;
-        margin: 20px;
+        margin: 20px 0;
+        max-width: 100%;
+        padding: 0 20px;
 
     }
 }
 
 .footer{
-    margin: 20px;
+    margin: 20px 0;
     padding: 20px;
+    width: 100%;
+    max-width: 100%;
     color: grey;
 }
