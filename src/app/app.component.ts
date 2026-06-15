@@ -1,43 +1,45 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { Job } from './models/job.model';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { TranslationContent, translations } from './i18n/translations';
+import { Lang, LanguageOption } from './models/language.model';
+import { Job } from './models/job.model';
+import { LanguageService } from './services/language.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'portfolio';
+  t: TranslationContent = translations.es;
+  langMenuOpen = false;
 
-
-  jobs: Job[] = [
-    {
-      name: 'Seeketing',
-      date: 'Abr 2021 - Jun 2021',
-      description: 'Becario - Desarrollo front, usando las tecnologías Angular, HTML5, CSS3, PHP.'
-    },
-    {
-      name: 'Unisys',
-      date: 'Oct 2021 - Feb 2022',
-      description: 'Formación en lenguaje ABAP/SAP.'
-    },
-    {
-      name: 'Atos',
-      date: 'Feb 2022 - Sept 2023',
-      description: 'Desarrollo aplicación móvil para iOS y Android con el framework Angular 13 usando Ionic 6 y Capacitor 4. Mejoras de código mediante la aplicación SONAR. Cobertura de servicios REST mediante pruebas jUnit. Desarrollo de publicaciones para el proyecto ESIOS QH (Cliente Red Eléctrica), mediante consultas a base de datos usando JAVA.'
-    },
-    {
-      name: 'Exaccta',
-      date: 'Abr 2024 - Abr 2025',
-      description: 'ESIOSQH - Desarrollo aplicación móvil para iOS y Android con el framework Angular 13 usando Ionic 6 y Capacitor 4. Mejoras de código mediante la aplicación SONAR. Cobertura de servicios REST mediante pruebas jUnit. Desarrollo de publicaciones para el proyecto ESIOS QH (Cliente Red Eléctrica), mediante consultas a base de datos usando JAVA.'
-    },
-    {
-      name: 'Capgemini',
-      date: 'Abr 2025 - actualidad',
-      description: 'SGAD - Front end developer, trabajando con Angular 19, Typescript 5, HTML5, CSS3, web components.'
-    }
+  readonly languages: LanguageOption[] = [
+    { code: 'es', label: 'Español' },
+    { code: 'en', label: 'English' }
   ];
+
+  technologies = [
+    { name: 'Sass', icon: 'assets/images/icons8-hablar-con-descaro-a-48.png' },
+    { name: 'HTML5', icon: 'assets/images/html-5.png' },
+    { name: 'CSS3', icon: 'assets/images/social.png' },
+    { name: 'TypeScript', icon: 'assets/images/icons8-mecanografiado-48.png' },
+    { name: 'JavaScript', icon: 'assets/images/js.png' },
+    { name: 'Java', icon: 'assets/images/java.png' },
+    { name: 'Angular', icon: 'assets/images/icons8-angular-48.png' },
+    { name: 'MySQL', icon: 'assets/images/mysql.png' },
+    { name: 'Ionic', icon: 'assets/images/icons8-iónico-48.png' },
+    { name: 'PHP', icon: 'assets/images/php.png' },
+    { name: 'Python', icon: 'assets/images/piton.png' },
+    { name: 'Git', icon: 'assets/images/icons8-sourcetree-is-a-nice-alternative-to-the-git-command-line-24.png' },
+    { name: 'GitHub', icon: 'assets/images/github.png' }
+  ];
+
+  aboutStats: { value: string; label: string }[] = [];
+  aboutHighlights: { icon: string; title: string; description: string }[] = [];
+  jobs: Job[] = [];
 
   contactForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -45,17 +47,59 @@ export class AppComponent implements OnInit {
     message: new FormControl('')
   });
 
-  ngOnInit() {
-    // Inicializar el navbar
+  private langSubscription?: Subscription;
+
+  constructor(private languageService: LanguageService) {}
+
+  ngOnInit(): void {
+    this.langSubscription = this.languageService.currentLang$.subscribe(() => {
+      this.applyTranslations();
+    });
+    this.applyTranslations();
     this.updateNavbar();
+  }
+
+  ngOnDestroy(): void {
+    this.langSubscription?.unsubscribe();
+  }
+
+  get currentLang(): Lang {
+    return this.languageService.currentLang;
+  }
+
+  get currentLangLabel(): string {
+    return this.languages.find((lang) => lang.code === this.currentLang)?.label ?? 'Español';
+  }
+
+  toggleLangMenu(event: Event): void {
+    event.stopPropagation();
+    this.langMenuOpen = !this.langMenuOpen;
+  }
+
+  selectLanguage(lang: Lang, event: Event): void {
+    event.stopPropagation();
+    this.languageService.setLanguage(lang);
+    this.langMenuOpen = false;
+  }
+
+  @HostListener('document:click')
+  closeLangMenu(): void {
+    this.langMenuOpen = false;
   }
 
   @HostListener('window:scroll', [])
-  onWindowScroll() {
+  onWindowScroll(): void {
     this.updateNavbar();
   }
 
-  private updateNavbar() {
+  private applyTranslations(): void {
+    this.t = this.languageService.content;
+    this.aboutStats = this.t.about.stats;
+    this.aboutHighlights = this.t.about.highlights;
+    this.jobs = this.t.jobs;
+  }
+
+  private updateNavbar(): void {
     const navbar = document.querySelector('.navbar');
     if (navbar) {
       if (window.scrollY > 50) {

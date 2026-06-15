@@ -4,10 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RevealDirective } from './directives/reveal.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RevealDirective
   ],
   imports: [
     BrowserModule,
