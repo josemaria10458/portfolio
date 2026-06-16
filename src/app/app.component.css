@@ -260,6 +260,14 @@ section, div, nav, main {
         border: 1px solid rgba(255, 255, 255, 0.2);
         width: 100%;
     }
+
+    .navbar-collapse.collapse:not(.show) {
+        display: none !important;
+    }
+
+    .navbar-collapse.collapse.show {
+        display: block !important;
+    }
     
     .navbar-nav {
         text-align: center;
@@ -326,6 +334,10 @@ section, div, nav, main {
 @media (min-width: 992px) {
     .navbar-toggler {
         display: none !important;
+    }
+
+    .navbar-collapse.collapse {
+        display: flex !important;
     }
 }
 

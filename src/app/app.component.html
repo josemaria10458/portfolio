@@ -4,30 +4,33 @@
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
+      [attr.aria-controls]="'navbarNav'"
+      [attr.aria-expanded]="navMenuOpen"
       [attr.aria-label]="t.nav.toggleMenu"
+      (click)="toggleNavMenu($event)"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div
+      class="collapse navbar-collapse"
+      id="navbarNav"
+      [class.show]="navMenuOpen"
+    >
       <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item">
-          <a class="nav-link" href="#acerca">{{ t.nav.about }}</a>
+          <a class="nav-link" href="#acerca" (click)="closeNavMenu()">{{ t.nav.about }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#experiencia">{{ t.nav.experience }}</a>
+          <a class="nav-link" href="#experiencia" (click)="closeNavMenu()">{{ t.nav.experience }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#lenguajes">{{ t.nav.languages }}</a>
+          <a class="nav-link" href="#lenguajes" (click)="closeNavMenu()">{{ t.nav.languages }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#proyectos">{{ t.nav.projects }}</a>
+          <a class="nav-link" href="#proyectos" (click)="closeNavMenu()">{{ t.nav.projects }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#contacto">{{ t.nav.contact }}</a>
+          <a class="nav-link" href="#contacto" (click)="closeNavMenu()">{{ t.nav.contact }}</a>
         </li>
         <li class="nav-item lang-dropdown">
           <button

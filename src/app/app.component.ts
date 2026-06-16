@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'portfolio';
   t: TranslationContent = translations.es;
   langMenuOpen = false;
+  navMenuOpen = false;
 
   readonly languages: LanguageOption[] = [
     { code: 'es', label: 'Español' },
@@ -71,6 +72,19 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.languages.find((lang) => lang.code === this.currentLang)?.label ?? 'Español';
   }
 
+  toggleNavMenu(event: Event): void {
+    event.stopPropagation();
+    this.navMenuOpen = !this.navMenuOpen;
+
+    if (this.navMenuOpen) {
+      this.langMenuOpen = false;
+    }
+  }
+
+  closeNavMenu(): void {
+    this.navMenuOpen = false;
+  }
+
   toggleLangMenu(event: Event): void {
     event.stopPropagation();
     this.langMenuOpen = !this.langMenuOpen;
@@ -83,8 +97,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('document:click')
-  closeLangMenu(): void {
+  closeMenus(): void {
     this.langMenuOpen = false;
+    this.navMenuOpen = false;
   }
 
   @HostListener('window:scroll', [])
